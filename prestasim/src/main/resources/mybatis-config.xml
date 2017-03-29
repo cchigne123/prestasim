@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* Resumen.
+* Objeto: mybatis-fn-config.xml
+* Descripción: Mapper parameters of AuditLog
+* Fecha de Creación: 25/01/2016
+* Requerimiento de Creación: SCP-613
+* Autor: GMD
+-->
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<mappers>
+		<mapper class="pe.edu.upc.prestasim.dao.UsuarioDao"/>
+	</mappers>
+</configuration>

@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pe.edu.upc.prestasim.dao.UsuarioDao">
+	
+	<insert id="regUser" parameterType="pe.edu.upc.prestasim.beans.Usuario" 
+	useGeneratedKeys="true" keyProperty="idusuario">
+		INSERT INTO usuario (nombre,dni,clave,telefono,email,fecnacimiento,idrangoingreso,autorizacion) 
+		VALUES 
+		(
+			#{nombre, jdbcType=VARCHAR},
+			#{dni, jdbcType=INTEGER},
+			#{clave, jdbcType=VARCHAR},
+			#{telefono, jdbcType=VARCHAR},
+			#{email, jdbcType=VARCHAR},
+			#{fecnacimiento, jdbcType=DATE},
+			#{idrangoingreso, jdbcType=INTEGER},
+			#{autorizacion, jdbcType=VARCHAR},
+		) 
+	</insert>
+	
+</mapper>
