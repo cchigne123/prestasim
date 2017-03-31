@@ -17,4 +17,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return (0 < userDao.regUser(user));
 	}
 
+	@Override
+	public Usuario obtainUser(int idusuario) {
+		return userDao.obtainUser(idusuario);
+	}
+
 }

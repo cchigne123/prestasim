@@ -15,8 +15,15 @@
 			#{email, jdbcType=VARCHAR},
 			#{fecnacimiento, jdbcType=DATE},
 			#{idrangoingreso, jdbcType=INTEGER},
-			#{autorizacion, jdbcType=VARCHAR},
+			#{autorizacion, jdbcType=VARCHAR}
 		) 
 	</insert>
+	
+	<select id="obtainUser" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Usuario">
+		SELECT * FROM usuario
+		<where>
+			idusuario = #{idusuario, jdbcType=INTEGER}
+		</where>
+	</select>
 	
 </mapper>

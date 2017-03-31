@@ -69,4 +69,11 @@ public class Usuario {
 		this.autorizacion = autorizacion;
 	}
 	
+	@Override
+	public String toString() {
+		return "Usuario: {"
+		+ "Nombre: " + this.nombre + ", DNI: " + this.dni
+		+ ", Email: " + this.email + ", Nacimiento: " + this.fecnacimiento
+		+ ", RangoIngreso: " + this.idrangoingreso + ", Autorizacion: " + this.autorizacion + "}";
+	}
 }

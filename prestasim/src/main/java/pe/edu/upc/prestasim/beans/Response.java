@@ -5,6 +5,7 @@ public class Response {
 	private String coderesult;
 	private String msgresult;
 	private String status;
+	private Usuario usuario;
 	
 	public String getCoderesult() {
 		return coderesult;
@@ -23,6 +24,12 @@ public class Response {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }
