@@ -20,6 +20,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import pe.edu.upc.prestasim.dao.MasterDao;
 import pe.edu.upc.prestasim.dao.UsuarioDao;
 import pe.edu.upc.prestasim.utils.Constants;
 
@@ -64,6 +65,14 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		@SuppressWarnings("resource")
 		SqlSessionTemplate objSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
 		UsuarioDao objMapper = objSessionTemplate.getMapper(UsuarioDao.class);
+		return objMapper;
+	}
+
+	@Bean
+	public MasterDao masterDao() throws Exception {
+		@SuppressWarnings("resource")
+		SqlSessionTemplate objSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+		MasterDao objMapper = objSessionTemplate.getMapper(MasterDao.class);
 		return objMapper;
 	}
 
