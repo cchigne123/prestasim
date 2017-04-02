@@ -1,0 +1,39 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pe.edu.upc.prestasim.dao.SolicitudDao">
+
+	<select id="obtainTaxForRequest" parameterType="pe.edu.upc.prestasim.beans.Solicitud"
+		resultType="pe.edu.upc.prestasim.beans.TasaInteres">
+		select * from tasainteres
+		<where>
+			idtipoprestamo = #{idtipoprestamo, jdbcType=INTEGER} AND
+			edadtope &gt; (SELECT TIMESTAMPDIFF(YEAR,fecnacimiento,now()) FROM usuario
+			WHERE idusuario = #{idusuario, jdbcType=VARCHAR}) AND
+			ingresomin &lt; (SELECT valormax FROM rangoingreso where idrangoingreso =
+			(SELECT idrangoingreso FROM usuario WHERE idusuario = #{idusuario, jdbcType=VARCHAR}))
+		</where>
+		GROUP BY identidad
+	</select>
+
+	<insert id="regLoanRequest" parameterType="pe.edu.upc.prestasim.beans.Solicitud"
+		useGeneratedKeys="true" keyProperty="idusuario">
+		INSERT INTO solicitud(idusuario,monto,plazo,fecsolicitud) VALUES
+		(
+			#{idusuario, jdbcType=INTEGER},
+			#{monto, jdbcType=NUMERIC},
+			#{plazo, jdbcType=INTEGER},
+			#{fecsolicitud, jdbcType=DATE}
+		)
+	</insert>
+
+	<insert id="regLoanRequestTax" parameterType="pe.edu.upc.prestasim.beans.SolicitudTasaInteres">
+		INSERT INTO solicitudtasainteres(idsolicitud,idtasa,montocuota) VALUES
+		(
+			#{idsolicitud, jdbcType=INTEGER},
+			#{idtasa, jdbcType=INTEGER},
+			#{montocuota, jdbcType=NUMERIC}
+		)
+	</insert>
+
+</mapper>
