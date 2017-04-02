@@ -14,6 +14,7 @@ public class Response {
 	private Usuario usuario;
 	private List<RangoIngreso> rangosIngreso;
 	private List<TipoPrestamo> tiposPrestamo;
+	private Solicitud solicitud;
 
 	public String getCoderesult() {
 		return coderesult;
@@ -50,6 +51,12 @@ public class Response {
 	}
 	public void setTiposPrestamo(List<TipoPrestamo> tiposPrestamo) {
 		this.tiposPrestamo = tiposPrestamo;
+	}
+	public Solicitud getSolicitud() {
+		return solicitud;
+	}
+	public void setSolicitud(Solicitud solicitud) {
+		this.solicitud = solicitud;
 	}
 
 }

@@ -18,5 +18,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper class="pe.edu.upc.prestasim.dao.UsuarioDao"/>
 		<mapper class="pe.edu.upc.prestasim.dao.MasterDao"/>
+		<mapper class="pe.edu.upc.prestasim.dao.SolicitudDao"/>
 	</mappers>
 </configuration>

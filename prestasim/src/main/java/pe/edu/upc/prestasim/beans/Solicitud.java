@@ -1,17 +1,17 @@
 package pe.edu.upc.prestasim.beans;
 
 import java.util.Date;
+import java.util.List;
 
 public class Solicitud {
 
 	private int idsolicitud;
 	private int idusuario;
-	private int idtasa;
 	private Double monto;
 	private int plazo;
 	private Date fecsolicitud;
-	private int cuotainicial;
-	private String montocuota;
+	private int idtipoprestamo;
+	private List<SolicitudTasaInteres> opciones;
 
 	public int getIdsolicitud() {
 		return idsolicitud;
@@ -24,12 +24,6 @@ public class Solicitud {
 	}
 	public void setIdusuario(int idusuario) {
 		this.idusuario = idusuario;
-	}
-	public int getIdtasa() {
-		return idtasa;
-	}
-	public void setIdtasa(int idtasa) {
-		this.idtasa = idtasa;
 	}
 	public Double getMonto() {
 		return monto;
@@ -49,17 +43,17 @@ public class Solicitud {
 	public void setFecsolicitud(Date fecsolicitud) {
 		this.fecsolicitud = fecsolicitud;
 	}
-	public int getCuotainicial() {
-		return cuotainicial;
+	public int getIdtipoprestamo() {
+		return idtipoprestamo;
 	}
-	public void setCuotainicial(int cuotainicial) {
-		this.cuotainicial = cuotainicial;
+	public void setIdtipoprestamo(int idtipoprestamo) {
+		this.idtipoprestamo = idtipoprestamo;
 	}
-	public String getMontocuota() {
-		return montocuota;
+	public List<SolicitudTasaInteres> getOpciones() {
+		return opciones;
 	}
-	public void setMontocuota(String montocuota) {
-		this.montocuota = montocuota;
+	public void setOpciones(List<SolicitudTasaInteres> opciones) {
+		this.opciones = opciones;
 	}
 
 }

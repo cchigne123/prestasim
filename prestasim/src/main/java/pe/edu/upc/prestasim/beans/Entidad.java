@@ -8,6 +8,12 @@ public class Entidad {
 	private String email;
 	private String telefono;
 
+	public Entidad(){}
+
+	public Entidad(int identidad){
+		this.identidad = identidad;
+	}
+
 	public int getIdentidad() {
 		return identidad;
 	}

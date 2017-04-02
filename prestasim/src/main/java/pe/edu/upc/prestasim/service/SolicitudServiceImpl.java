@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.upc.prestasim.beans.Entidad;
 import pe.edu.upc.prestasim.beans.Solicitud;
@@ -12,6 +13,7 @@ import pe.edu.upc.prestasim.beans.TasaInteres;
 import pe.edu.upc.prestasim.dao.MasterDao;
 import pe.edu.upc.prestasim.dao.SolicitudDao;
 
+@Service
 public class SolicitudServiceImpl implements SolicitudService {
 
 	@Autowired
@@ -36,7 +38,7 @@ public class SolicitudServiceImpl implements SolicitudService {
 				soltasint.setMontocuota((solicitud.getMonto() + ((tax.getTasa()/12)*solicitud.getPlazo()*
 						solicitud.getMonto())/100)/solicitud.getPlazo());
 				soltasint.setCuotainicial((solicitud.getMonto() * tax.getCuotainicial())/100);
-				soltasint.setNomentidad(entities.get(tax.getIdentidad()).getNombre());
+				soltasint.setNomentidad(entities.get(entities.indexOf(new Entidad(tax.getIdentidad()))).getNombre());
 				options.add(soltasint);
 				solicDao.regLoanRequestTax(soltasint);
 			}

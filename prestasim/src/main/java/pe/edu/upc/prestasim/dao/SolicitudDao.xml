@@ -17,7 +17,7 @@
 	</select>
 
 	<insert id="regLoanRequest" parameterType="pe.edu.upc.prestasim.beans.Solicitud"
-		useGeneratedKeys="true" keyProperty="idusuario">
+		useGeneratedKeys="true" keyProperty="idsolicitud">
 		INSERT INTO solicitud(idusuario,monto,plazo,fecsolicitud) VALUES
 		(
 			#{idusuario, jdbcType=INTEGER},
