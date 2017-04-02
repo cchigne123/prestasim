@@ -8,5 +8,7 @@ import pe.edu.upc.prestasim.beans.SolicitudTasaInteres;
 public interface SolicitudService {
 
 	List<SolicitudTasaInteres> registerLoanRequest(Solicitud solicitud);
+	List<Solicitud> obtainLoanRequests(int idusuario);
+	Solicitud obtainLoanRequestOptions(Integer idsolicitud);
 
 }

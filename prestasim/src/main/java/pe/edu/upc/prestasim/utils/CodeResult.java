@@ -6,7 +6,8 @@ public enum CodeResult {
 	GENERIC_ERROR("1", "001E" ,"Ocurrio un error al ejecutar la operacion solicitada"),
 	REGISTER_ERROR("1", "002E" ,"No se pudo concretar el registro"),
 	LOGIN_ERROR("1", "003E" ,"No se pudo autenticar al usuario"),
-	UPDATE_ERROR("1", "004E" ,"No se pudo actualizar el registro");
+	UPDATE_ERROR("1", "004E" ,"No se pudo actualizar el registro"),
+	FORBIDDEN_REQUEST_ERROR("1", "005E" ,"No tiene permisos para consultar esta solicitud");
 
 	private String status;
 	private String code;

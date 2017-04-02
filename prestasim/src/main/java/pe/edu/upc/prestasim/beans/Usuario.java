@@ -2,6 +2,10 @@ package pe.edu.upc.prestasim.beans;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class Usuario {
 
 	private Integer idusuario;
@@ -13,7 +17,7 @@ public class Usuario {
 	private Date fecnacimiento;
 	private Integer idrangoingreso;
 	private String autorizacion;
-	
+
 	public int getIdusuario() {
 		return idusuario;
 	}
@@ -68,7 +72,7 @@ public class Usuario {
 	public void setAutorizacion(String autorizacion) {
 		this.autorizacion = autorizacion;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Usuario: {"

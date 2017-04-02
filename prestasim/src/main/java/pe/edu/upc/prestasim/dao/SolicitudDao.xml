@@ -36,4 +36,30 @@
 		)
 	</insert>
 
+	<select id="obtainLoanRequests" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Solicitud">
+		SELECT sol.*,tp.nombre as nomtipoprestamo FROM solicitud sol
+		INNER JOIN solicitudtasainteres sti on sti.idsolicitud = sol.idsolicitud
+		INNER JOIN tasainteres ta on ta.idtasa = sti.idtasa
+		INNER JOIN tipoprestamo tp on tp.idtipoprestamo = ta.idtipoprestamo
+		<where>
+			sol.idusuario = #{idusuario, jdbcType=INTEGER}
+		</where>
+	</select>
+
+	<select id="obtainLoanRequestById" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Solicitud">
+		SELECT * FROM solicitud
+		<where>
+			idsolicitud = #{idsolicitud, jdbcType=INTEGER}
+		</where>
+	</select>
+
+	<select id="obtainLoanRequestOptions" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.SolicitudTasaInteres">
+		SELECT sti.*,ent.nombre as nomentidad FROM solicitudtasainteres sti
+		INNER JOIN tasainteres ta on ta.idtasa = sti.idtasa
+		INNER JOIN entidad ent on ta.identidad = ent.identidad
+		<where>
+			sti.idsolicitud = #{idsolicitud, jdbcType=INTEGER}
+		</where>
+	</select>
+
 </mapper>

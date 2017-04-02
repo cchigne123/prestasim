@@ -39,6 +39,37 @@ public class SolicitudController {
 		return response;
     }
 
+	@RequestMapping(method = RequestMethod.GET, produces = Constants.APPLICATIONJSON)
+    public @ResponseBody Response obtainSolicitudes(@PathVariable("id") Integer iduser) {
+		Response response = new Response();
+		try {
+			response.setSolicitudes(solicService.obtainLoanRequests(iduser));
+		} catch (Exception e){
+			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
+			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
+		}
+		return response;
+    }
 
+	@RequestMapping(value="/{idsolicitud}", method = RequestMethod.GET, produces = Constants.APPLICATIONJSON)
+    public @ResponseBody Response obtainOpcioneSolicitud(@PathVariable("id") Integer iduser, @PathVariable("idsolicitud") Integer idsol) {
+		Response response = new Response();
+		try {
+			Solicitud sol = solicService.obtainLoanRequestOptions(idsol);
+			if(sol.getIdusuario().equals(iduser)){
+				response.setSolicitud(solicService.obtainLoanRequestOptions(idsol));
+			} else {
+				response.setCoderesult(CodeResult.FORBIDDEN_REQUEST_ERROR.getCode());
+				response.setMsgresult(CodeResult.FORBIDDEN_REQUEST_ERROR.getMessage());
+				response.setStatus(CodeResult.FORBIDDEN_REQUEST_ERROR.getStatus());
+			}
+		} catch (Exception e){
+			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
+			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
+		}
+		return response;
+    }
 
 }

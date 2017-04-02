@@ -3,26 +3,32 @@ package pe.edu.upc.prestasim.beans;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class Solicitud {
 
-	private int idsolicitud;
-	private int idusuario;
+	private Integer idsolicitud;
+	private Integer idusuario;
 	private Double monto;
-	private int plazo;
+	private Integer plazo;
 	private Date fecsolicitud;
-	private int idtipoprestamo;
+	private Integer idtipoprestamo;
 	private List<SolicitudTasaInteres> opciones;
 
-	public int getIdsolicitud() {
+	private String nomtipoprestamo;
+
+	public Integer getIdsolicitud() {
 		return idsolicitud;
 	}
-	public void setIdsolicitud(int idsolicitud) {
+	public void setIdsolicitud(Integer idsolicitud) {
 		this.idsolicitud = idsolicitud;
 	}
-	public int getIdusuario() {
+	public Integer getIdusuario() {
 		return idusuario;
 	}
-	public void setIdusuario(int idusuario) {
+	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
 	}
 	public Double getMonto() {
@@ -31,10 +37,10 @@ public class Solicitud {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-	public int getPlazo() {
+	public Integer getPlazo() {
 		return plazo;
 	}
-	public void setPlazo(int plazo) {
+	public void setPlazo(Integer plazo) {
 		this.plazo = plazo;
 	}
 	public Date getFecsolicitud() {
@@ -43,10 +49,10 @@ public class Solicitud {
 	public void setFecsolicitud(Date fecsolicitud) {
 		this.fecsolicitud = fecsolicitud;
 	}
-	public int getIdtipoprestamo() {
+	public Integer getIdtipoprestamo() {
 		return idtipoprestamo;
 	}
-	public void setIdtipoprestamo(int idtipoprestamo) {
+	public void setIdtipoprestamo(Integer idtipoprestamo) {
 		this.idtipoprestamo = idtipoprestamo;
 	}
 	public List<SolicitudTasaInteres> getOpciones() {
@@ -54,6 +60,12 @@ public class Solicitud {
 	}
 	public void setOpciones(List<SolicitudTasaInteres> opciones) {
 		this.opciones = opciones;
+	}
+	public String getNomtipoprestamo() {
+		return nomtipoprestamo;
+	}
+	public void setNomtipoprestamo(String nomtipoprestamo) {
+		this.nomtipoprestamo = nomtipoprestamo;
 	}
 
 }

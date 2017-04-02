@@ -46,4 +46,18 @@ public class SolicitudServiceImpl implements SolicitudService {
 		return options;
 	}
 
+	@Override
+	public List<Solicitud> obtainLoanRequests(int idusuario) {
+		return solicDao.obtainLoanRequests(idusuario);
+	}
+
+	@Override
+	public Solicitud obtainLoanRequestOptions(Integer idsolicitud) {
+		Solicitud sol = solicDao.obtainLoanRequestById(idsolicitud);
+		if(sol != null){
+			sol.setOpciones(solicDao.obtainLoanRequestOptions(idsolicitud));
+		}
+		return sol;
+	}
+
 }
