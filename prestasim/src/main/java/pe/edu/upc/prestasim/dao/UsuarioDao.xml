@@ -2,11 +2,11 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="pe.edu.upc.prestasim.dao.UsuarioDao">
-	
-	<insert id="regUser" parameterType="pe.edu.upc.prestasim.beans.Usuario" 
+
+	<insert id="regUser" parameterType="pe.edu.upc.prestasim.beans.Usuario"
 	useGeneratedKeys="true" keyProperty="idusuario">
-		INSERT INTO usuario (nombre,dni,clave,telefono,email,fecnacimiento,idrangoingreso,autorizacion) 
-		VALUES 
+		INSERT INTO usuario (nombre,dni,clave,telefono,email,fecnacimiento,idrangoingreso,autorizacion)
+		VALUES
 		(
 			#{nombre, jdbcType=VARCHAR},
 			#{dni, jdbcType=INTEGER},
@@ -16,14 +16,36 @@
 			#{fecnacimiento, jdbcType=DATE},
 			#{idrangoingreso, jdbcType=INTEGER},
 			#{autorizacion, jdbcType=VARCHAR}
-		) 
+		)
 	</insert>
-	
+
 	<select id="obtainUser" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Usuario">
 		SELECT * FROM usuario
 		<where>
 			idusuario = #{idusuario, jdbcType=INTEGER}
 		</where>
 	</select>
-	
+
+	<select id="authUser" parameterType="pe.edu.upc.prestasim.beans.Usuario"
+		resultType="pe.edu.upc.prestasim.beans.Usuario">
+		SELECT * FROM usuario
+		<where>
+			dni = #{dni, jdbcType=INTEGER} AND
+			clave = #{clave, jdbcType=VARCHAR}
+		</where>
+	</select>
+
+	<update id="updateUser" parameterType="pe.edu.upc.prestasim.beans.Usuario">
+		UPDATE usuario SET nombre = #{nombre, jdbcType=VARCHAR},
+		clave = #{clave, jdbcType=VARCHAR},
+		telefono = #{telefono, jdbcType=VARCHAR},
+		email = #{email, jdbcType=VARCHAR},
+		fecnacimiento = #{fecnacimiento, jdbcType=DATE},
+		idrangoingreso = #{idrangoingreso, jdbcType=INTEGER},
+		autorizacion = #{autorizacion, jdbcType=VARCHAR}
+		<where>
+			dni = #{dni, jdbcType=INTEGER}
+		</where>
+	</update>
+
 </mapper>

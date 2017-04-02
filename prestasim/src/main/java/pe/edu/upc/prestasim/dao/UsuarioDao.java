@@ -7,7 +7,8 @@ import pe.edu.upc.prestasim.beans.Usuario;
 public interface UsuarioDao {
 
 	int regUser(Usuario usuario);
-	
 	Usuario obtainUser(@Param("idusuario")int idusuario);
-	
+	Usuario authUser(Usuario user);
+	int updateUser(Usuario usuario);
+
 }

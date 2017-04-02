@@ -9,7 +9,6 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -31,7 +30,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
     private Environment env;
-	
+
 	@Bean(name = "dataSource")
     public BasicDataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
@@ -59,7 +58,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		objBuilder.indentOutput(true).dateFormat(new SimpleDateFormat(Constants.STR_DATE_FORMAT_YYYY_MM_DD));
 		lstConverters.add(new MappingJackson2HttpMessageConverter(objBuilder.build()));
 	}
-	
+
 	@Bean
 	public UsuarioDao usuarioDao() throws Exception {
 		@SuppressWarnings("resource")

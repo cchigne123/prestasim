@@ -11,7 +11,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private UsuarioDao userDao;
-	
+
 	@Override
 	public boolean registerUser(Usuario user) {
 		return (0 < userDao.regUser(user));
@@ -20,6 +20,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario obtainUser(int idusuario) {
 		return userDao.obtainUser(idusuario);
+	}
+
+	@Override
+	public Usuario authenticateUser(Usuario user) {
+		return userDao.authUser(user);
+	}
+
+	@Override
+	public boolean updateUser(Usuario user) {
+		return (0 < userDao.updateUser(user));
 	}
 
 }

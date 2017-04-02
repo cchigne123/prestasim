@@ -6,5 +6,7 @@ public interface UsuarioService {
 
 	boolean registerUser(Usuario user);
 	Usuario obtainUser(int idusuario);
-	
+	Usuario authenticateUser(Usuario user);
+	boolean updateUser(Usuario user);
+
 }
