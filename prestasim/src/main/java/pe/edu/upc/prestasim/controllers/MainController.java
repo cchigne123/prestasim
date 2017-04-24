@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.upc.prestasim.beans.Response;
-import pe.edu.upc.prestasim.beans.Usuario;
+import pe.edu.upc.prestasim.beans.Users;
 import pe.edu.upc.prestasim.service.MasterService;
 import pe.edu.upc.prestasim.service.UsuarioService;
 import pe.edu.upc.prestasim.utils.CodeResult;
@@ -24,22 +24,23 @@ public class MainController {
 	private MasterService masterService;
 
 	@RequestMapping(value="/login", method = RequestMethod.POST, produces = Constants.APPLICATIONJSON)
-    public @ResponseBody Response login(@RequestBody Usuario user) {
+    public @ResponseBody Response login(@RequestBody Users user) {
 		Response response = new Response();
 		try {
 			user = userService.authenticateUser(user);
 			response.setStatus(CodeResult.OK.getStatus());
 			response.setCoderesult(CodeResult.OK.getCode());
 			response.setMsgresult(CodeResult.OK.getMessage());
-			response.setUsuario(user);
+			response.setUser(user);
 			if(user == null){
 				response.setCoderesult(CodeResult.LOGIN_ERROR.getCode());
 				response.setMsgresult(CodeResult.LOGIN_ERROR.getMessage());
 				response.setStatus(CodeResult.LOGIN_ERROR.getStatus());
 			}
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;
@@ -49,10 +50,11 @@ public class MainController {
     public @ResponseBody Response paymentRanks() {
 		Response response = new Response();
 		try {
-			response.setRangosIngreso(masterService.obtainPaymentRanks());
+			response.setPaymentRanks(masterService.obtainPaymentRanks());
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;
@@ -62,10 +64,11 @@ public class MainController {
     public @ResponseBody Response loanTypes() {
 		Response response = new Response();
 		try {
-			response.setTiposPrestamo(masterService.obtainLoanTypes());
+			response.setLoanTypes(masterService.obtainLoanTypes());
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;

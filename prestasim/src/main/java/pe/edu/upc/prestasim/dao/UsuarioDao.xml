@@ -3,48 +3,50 @@
 
 <mapper namespace="pe.edu.upc.prestasim.dao.UsuarioDao">
 
-	<insert id="regUser" parameterType="pe.edu.upc.prestasim.beans.Usuario"
-	useGeneratedKeys="true" keyProperty="idusuario">
-		INSERT INTO usuario (nombre,dni,clave,telefono,email,fecnacimiento,idrangoingreso,autorizacion)
+	<insert id="regUser" parameterType="pe.edu.upc.prestasim.beans.Users"
+	useGeneratedKeys="true" keyProperty="id_user">
+		INSERT INTO users (name,dni,password,phone_number,email,birth_date,id_payment_rank,authorization)
 		VALUES
 		(
-			#{nombre, jdbcType=VARCHAR},
-			#{dni, jdbcType=INTEGER},
-			#{clave, jdbcType=VARCHAR},
-			#{telefono, jdbcType=VARCHAR},
+			#{name, jdbcType=VARCHAR},
+			#{dni, jdbcType=VARCHAR},
+			#{password, jdbcType=VARCHAR},
+			#{phone_number, jdbcType=VARCHAR},
 			#{email, jdbcType=VARCHAR},
-			#{fecnacimiento, jdbcType=DATE},
-			#{idrangoingreso, jdbcType=INTEGER},
-			#{autorizacion, jdbcType=VARCHAR}
+			STR_TO_DATE(#{birth_date, jdbcType=VARCHAR}, '%d/%m/%Y'),
+			#{id_payment_rank, jdbcType=INTEGER},
+			#{authorization, jdbcType=VARCHAR}
 		)
 	</insert>
 
-	<select id="obtainUser" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Usuario">
-		SELECT * FROM usuario
+	<select id="obtainUser" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Users">
+		SELECT id_user,name,dni,phone_number,email,id_payment_rank,
+		DATE_FORMAT(birth_date, '%d/%m/%Y') as birth_date FROM users
 		<where>
-			idusuario = #{idusuario, jdbcType=INTEGER}
+			id_user = #{id_user, jdbcType=INTEGER}
 		</where>
 	</select>
 
-	<select id="authUser" parameterType="pe.edu.upc.prestasim.beans.Usuario"
-		resultType="pe.edu.upc.prestasim.beans.Usuario">
-		SELECT * FROM usuario
+	<select id="authUser" parameterType="pe.edu.upc.prestasim.beans.Users"
+		resultType="pe.edu.upc.prestasim.beans.Users">
+		SELECT id_user,name,dni,phone_number,email,id_payment_rank,
+		DATE_FORMAT(birth_date, '%d/%m/%Y') as birth_date FROM users
 		<where>
-			dni = #{dni, jdbcType=INTEGER} AND
-			clave = #{clave, jdbcType=VARCHAR}
+			dni = #{dni, jdbcType=VARCHAR} AND
+			password = #{password, jdbcType=VARCHAR}
 		</where>
 	</select>
 
-	<update id="updateUser" parameterType="pe.edu.upc.prestasim.beans.Usuario">
-		UPDATE usuario SET nombre = #{nombre, jdbcType=VARCHAR},
-		clave = #{clave, jdbcType=VARCHAR},
-		telefono = #{telefono, jdbcType=VARCHAR},
+	<update id="updateUser" parameterType="pe.edu.upc.prestasim.beans.Users">
+		UPDATE users SET name = #{name, jdbcType=VARCHAR},
+		password = #{password, jdbcType=VARCHAR},
+		phone_number = #{phone_number, jdbcType=VARCHAR},
 		email = #{email, jdbcType=VARCHAR},
-		fecnacimiento = #{fecnacimiento, jdbcType=DATE},
-		idrangoingreso = #{idrangoingreso, jdbcType=INTEGER},
-		autorizacion = #{autorizacion, jdbcType=VARCHAR}
+		birth_date = #{birth_date, jdbcType=DATE},
+		id_payment_rank = #{id_payment_rank, jdbcType=INTEGER},
+		authorization = #{authorization, jdbcType=VARCHAR}
 		<where>
-			dni = #{dni, jdbcType=INTEGER}
+			id_user = #{id_user, jdbcType=INTEGER}
 		</where>
 	</update>
 

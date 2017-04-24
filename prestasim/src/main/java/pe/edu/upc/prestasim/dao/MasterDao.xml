@@ -3,18 +3,18 @@
 
 <mapper namespace="pe.edu.upc.prestasim.dao.MasterDao">
 
-	<select id="obtainPaymentRanks" resultType="pe.edu.upc.prestasim.beans.RangoIngreso">
-		SELECT * FROM rangoingreso
+	<select id="obtainPaymentRanks" resultType="pe.edu.upc.prestasim.beans.PaymentRanks">
+		SELECT * FROM payment_ranks
 	</select>
 
-	<select id="obtainLoanTypes" resultType="pe.edu.upc.prestasim.beans.TipoPrestamo">
-		SELECT * FROM tipoprestamo
+	<select id="obtainLoanTypes" resultType="pe.edu.upc.prestasim.beans.LoanTypes">
+		SELECT * FROM loan_types
 	</select>
 
-	<select id="obtainEntityDetails" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Entidad">
-		SELECT * FROM entidad
+	<select id="obtainEntityDetails" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Entities">
+		SELECT * FROM entities
 		<where>
-			identidad = #{identidad, jdbcType=INTEGER}
+			id_entity = #{id_entity, jdbcType=INTEGER}
 		</where>
 	</select>
 

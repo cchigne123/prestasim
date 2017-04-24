@@ -2,13 +2,13 @@ package pe.edu.upc.prestasim.service;
 
 import java.util.List;
 
-import pe.edu.upc.prestasim.beans.Solicitud;
-import pe.edu.upc.prestasim.beans.SolicitudTasaInteres;
+import pe.edu.upc.prestasim.beans.Requests;
+import pe.edu.upc.prestasim.beans.RequestTaxes;
 
 public interface SolicitudService {
 
-	List<SolicitudTasaInteres> registerLoanRequest(Solicitud solicitud);
-	List<Solicitud> obtainLoanRequests(int idusuario);
-	Solicitud obtainLoanRequestOptions(Integer idsolicitud);
+	List<RequestTaxes> registerLoanRequest(Requests solicitud);
+	List<Requests> obtainLoanRequests(int idusuario);
+	Requests obtainLoanRequestOptions(Integer idsolicitud);
 
 }

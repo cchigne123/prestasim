@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.edu.upc.prestasim.beans.Entidad;
-import pe.edu.upc.prestasim.beans.Solicitud;
-import pe.edu.upc.prestasim.beans.SolicitudTasaInteres;
-import pe.edu.upc.prestasim.beans.TasaInteres;
+import pe.edu.upc.prestasim.beans.Entities;
+import pe.edu.upc.prestasim.beans.Requests;
+import pe.edu.upc.prestasim.beans.RequestTaxes;
+import pe.edu.upc.prestasim.beans.Taxes;
 import pe.edu.upc.prestasim.dao.MasterDao;
 import pe.edu.upc.prestasim.dao.SolicitudDao;
 
@@ -23,22 +23,22 @@ public class SolicitudServiceImpl implements SolicitudService {
 	private MasterDao masterDao;
 
 	@Override
-	public List<SolicitudTasaInteres> registerLoanRequest(Solicitud solicitud) {
-		List<SolicitudTasaInteres> options = new ArrayList<>();
-		List<Entidad> entities = new ArrayList<>();
-		List<TasaInteres> taxes = solicDao.obtainTaxForRequest(solicitud);
+	public List<RequestTaxes> registerLoanRequest(Requests solicitud) {
+		List<RequestTaxes> options = new ArrayList<>();
+		List<Entities> entities = new ArrayList<>();
+		List<Taxes> taxes = solicDao.obtainTaxForRequest(solicitud);
 		if(taxes != null && !taxes.isEmpty() && solicDao.regLoanRequest(solicitud) > 0){
-			for(TasaInteres tax : taxes){
-				if(!entities.contains(tax.getIdentidad())){
-					entities.add(masterDao.obtainEntityDetails(tax.getIdentidad()));
+			for(Taxes tax : taxes){
+				if(!entities.contains(tax.getId_entity())){
+					entities.add(masterDao.obtainEntityDetails(tax.getId_entity()));
 				}
-				SolicitudTasaInteres soltasint = new SolicitudTasaInteres();
-				soltasint.setIdsolicitud(solicitud.getIdsolicitud());
-				soltasint.setIdtasa(tax.getIdtasa());
-				soltasint.setMontocuota((solicitud.getMonto() + ((tax.getTasa()/12)*solicitud.getPlazo()*
-						solicitud.getMonto())/100)/solicitud.getPlazo());
-				soltasint.setCuotainicial((solicitud.getMonto() * tax.getCuotainicial())/100);
-				soltasint.setNomentidad(entities.get(entities.indexOf(new Entidad(tax.getIdentidad()))).getNombre());
+				RequestTaxes soltasint = new RequestTaxes();
+				soltasint.setId_request(solicitud.getId_request());
+				soltasint.setId_tax(tax.getId_tax());
+				soltasint.setInstallment_amount((solicitud.getAmount() + ((tax.getTax()/12)*solicitud.getInstallments()*
+						solicitud.getAmount())/100)/solicitud.getInstallments());
+				soltasint.setInitial_payment((solicitud.getAmount() * tax.getInitial_payment())/100);
+				soltasint.setEntityName(entities.get(entities.indexOf(new Entities(tax.getId_entity()))).getName());
 				options.add(soltasint);
 				solicDao.regLoanRequestTax(soltasint);
 			}
@@ -47,15 +47,15 @@ public class SolicitudServiceImpl implements SolicitudService {
 	}
 
 	@Override
-	public List<Solicitud> obtainLoanRequests(int idusuario) {
+	public List<Requests> obtainLoanRequests(int idusuario) {
 		return solicDao.obtainLoanRequests(idusuario);
 	}
 
 	@Override
-	public Solicitud obtainLoanRequestOptions(Integer idsolicitud) {
-		Solicitud sol = solicDao.obtainLoanRequestById(idsolicitud);
+	public Requests obtainLoanRequestOptions(Integer idsolicitud) {
+		Requests sol = solicDao.obtainLoanRequestById(idsolicitud);
 		if(sol != null){
-			sol.setOpciones(solicDao.obtainLoanRequestOptions(idsolicitud));
+			sol.setOptions(solicDao.obtainLoanRequestOptions(idsolicitud));
 		}
 		return sol;
 	}

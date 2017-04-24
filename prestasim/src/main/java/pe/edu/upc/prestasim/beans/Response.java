@@ -11,11 +11,11 @@ public class Response {
 	private String coderesult;
 	private String msgresult;
 	private String status;
-	private Usuario usuario;
-	private List<RangoIngreso> rangosIngreso;
-	private List<TipoPrestamo> tiposPrestamo;
-	private Solicitud solicitud;
-	private List<Solicitud> solicitudes;
+	private Users user;
+	private List<PaymentRanks> paymentRanks;
+	private List<LoanTypes> loanTypes;
+	private Requests request;
+	private List<Requests> requests;
 
 	public String getCoderesult() {
 		return coderesult;
@@ -35,35 +35,35 @@ public class Response {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Usuario getUsuario() {
-		return usuario;
+	public Users getUser() {
+		return user;
 	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUser(Users usuario) {
+		this.user = usuario;
 	}
-	public List<RangoIngreso> getRangosIngreso() {
-		return rangosIngreso;
+	public List<PaymentRanks> getPaymentRanks() {
+		return paymentRanks;
 	}
-	public void setRangosIngreso(List<RangoIngreso> rangosIngreso) {
-		this.rangosIngreso = rangosIngreso;
+	public void setPaymentRanks(List<PaymentRanks> rangosIngreso) {
+		this.paymentRanks = rangosIngreso;
 	}
-	public List<TipoPrestamo> getTiposPrestamo() {
-		return tiposPrestamo;
+	public List<LoanTypes> getLoanTypes() {
+		return loanTypes;
 	}
-	public void setTiposPrestamo(List<TipoPrestamo> tiposPrestamo) {
-		this.tiposPrestamo = tiposPrestamo;
+	public void setLoanTypes(List<LoanTypes> tiposPrestamo) {
+		this.loanTypes = tiposPrestamo;
 	}
-	public Solicitud getSolicitud() {
-		return solicitud;
+	public Requests getRequest() {
+		return request;
 	}
-	public void setSolicitud(Solicitud solicitud) {
-		this.solicitud = solicitud;
+	public void setRequest(Requests solicitud) {
+		this.request = solicitud;
 	}
-	public List<Solicitud> getSolicitudes() {
-		return solicitudes;
+	public List<Requests> getRequests() {
+		return requests;
 	}
-	public void setSolicitudes(List<Solicitud> solicitudes) {
-		this.solicitudes = solicitudes;
+	public void setRequests(List<Requests> solicitudes) {
+		this.requests = solicitudes;
 	}
 
 }

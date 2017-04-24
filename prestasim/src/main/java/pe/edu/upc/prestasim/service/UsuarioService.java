@@ -1,12 +1,12 @@
 package pe.edu.upc.prestasim.service;
 
-import pe.edu.upc.prestasim.beans.Usuario;
+import pe.edu.upc.prestasim.beans.Users;
 
 public interface UsuarioService {
 
-	boolean registerUser(Usuario user);
-	Usuario obtainUser(int idusuario);
-	Usuario authenticateUser(Usuario user);
-	boolean updateUser(Usuario user);
+	boolean registerUser(Users user);
+	Users obtainUser(int idusuario);
+	Users authenticateUser(Users user);
+	boolean updateUser(Users user);
 
 }

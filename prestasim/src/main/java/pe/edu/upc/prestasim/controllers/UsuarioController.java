@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.upc.prestasim.beans.Response;
-import pe.edu.upc.prestasim.beans.Usuario;
+import pe.edu.upc.prestasim.beans.Users;
 import pe.edu.upc.prestasim.service.UsuarioService;
 import pe.edu.upc.prestasim.utils.CodeResult;
 import pe.edu.upc.prestasim.utils.Constants;
@@ -22,9 +22,10 @@ public class UsuarioController {
 	private UsuarioService userService;
 
 	@RequestMapping(method = RequestMethod.POST, produces = Constants.APPLICATIONJSON)
-    public @ResponseBody Response registerUser(@RequestBody Usuario user) {
+    public @ResponseBody Response registerUser(@RequestBody Users user) {
 		Response response = new Response();
 		try {
+			System.out.println(user.toString());
 			response.setStatus(CodeResult.OK.getStatus());
 			response.setMsgresult(CodeResult.OK.getMessage());
 			response.setCoderesult(CodeResult.OK.getCode());
@@ -33,9 +34,11 @@ public class UsuarioController {
 				response.setMsgresult(CodeResult.REGISTER_ERROR.getMessage());
 				response.setStatus(CodeResult.REGISTER_ERROR.getStatus());
 			}
+			response.setUser(user);
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;
@@ -45,20 +48,28 @@ public class UsuarioController {
     public @ResponseBody Response obtainUser(@PathVariable("id") Integer id) {
 		Response response = new Response();
 		try {
-			response.setUsuario(userService.obtainUser(id));
-			response.setStatus(CodeResult.OK.getStatus());
-			response.setMsgresult(CodeResult.OK.getMessage());
-			response.setCoderesult(CodeResult.OK.getCode());
+			response.setUser(userService.obtainUser(id));
+			if(null == response.getUser()){
+				response.setStatus(CodeResult.INEXISTENT_USER_ERROR.getStatus());
+				response.setMsgresult(CodeResult.INEXISTENT_USER_ERROR.getMessage());
+				response.setCoderesult(CodeResult.INEXISTENT_USER_ERROR.getCode());
+			} else {
+				response.setStatus(CodeResult.OK.getStatus());
+				response.setMsgresult(CodeResult.OK.getMessage());
+				response.setCoderesult(CodeResult.OK.getCode());
+			}
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
+
 		}
 		return response;
     }
 
 	@RequestMapping(method = RequestMethod.PUT, produces = Constants.APPLICATIONJSON)
-    public @ResponseBody Response updateUser(@RequestBody Usuario user) {
+    public @ResponseBody Response updateUser(@RequestBody Users user) {
 		Response response = new Response();
 		try {
 			response.setStatus(CodeResult.OK.getStatus());
@@ -70,8 +81,9 @@ public class UsuarioController {
 				response.setStatus(CodeResult.UPDATE_ERROR.getStatus());
 			}
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;

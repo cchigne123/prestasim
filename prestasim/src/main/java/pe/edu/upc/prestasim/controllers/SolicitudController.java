@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.upc.prestasim.beans.Response;
-import pe.edu.upc.prestasim.beans.Solicitud;
+import pe.edu.upc.prestasim.beans.Requests;
 import pe.edu.upc.prestasim.service.SolicitudService;
 import pe.edu.upc.prestasim.utils.CodeResult;
 import pe.edu.upc.prestasim.utils.Constants;
@@ -24,16 +24,17 @@ public class SolicitudController {
 	private SolicitudService solicService;
 
 	@RequestMapping(method = RequestMethod.POST, produces = Constants.APPLICATIONJSON)
-    public @ResponseBody Response regSolicitud(@PathVariable("id") Integer iduser, @RequestBody Solicitud solicitud) {
+    public @ResponseBody Response regSolicitud(@PathVariable("id") Integer iduser, @RequestBody Requests solicitud) {
 		Response response = new Response();
 		try {
-			solicitud.setFecsolicitud(new Date());
-			solicitud.setIdusuario(iduser);
-			solicitud.setOpciones(solicService.registerLoanRequest(solicitud));
-			response.setSolicitud(solicitud);
+			solicitud.setRegister_date(new Date());
+			solicitud.setId_user(iduser);
+			solicitud.setOptions(solicService.registerLoanRequest(solicitud));
+			response.setRequest(solicitud);
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;
@@ -43,10 +44,11 @@ public class SolicitudController {
     public @ResponseBody Response obtainSolicitudes(@PathVariable("id") Integer iduser) {
 		Response response = new Response();
 		try {
-			response.setSolicitudes(solicService.obtainLoanRequests(iduser));
+			response.setRequests(solicService.obtainLoanRequests(iduser));
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;
@@ -56,17 +58,18 @@ public class SolicitudController {
     public @ResponseBody Response obtainOpcioneSolicitud(@PathVariable("id") Integer iduser, @PathVariable("idsolicitud") Integer idsol) {
 		Response response = new Response();
 		try {
-			Solicitud sol = solicService.obtainLoanRequestOptions(idsol);
-			if(sol.getIdusuario().equals(iduser)){
-				response.setSolicitud(solicService.obtainLoanRequestOptions(idsol));
+			Requests sol = solicService.obtainLoanRequestOptions(idsol);
+			if(sol.getId_user().equals(iduser)){
+				response.setRequest(solicService.obtainLoanRequestOptions(idsol));
 			} else {
 				response.setCoderesult(CodeResult.FORBIDDEN_REQUEST_ERROR.getCode());
 				response.setMsgresult(CodeResult.FORBIDDEN_REQUEST_ERROR.getMessage());
 				response.setStatus(CodeResult.FORBIDDEN_REQUEST_ERROR.getStatus());
 			}
 		} catch (Exception e){
+			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
+			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
 			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
 		}
 		return response;
