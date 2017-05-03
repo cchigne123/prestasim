@@ -37,7 +37,7 @@
 	</insert>
 
 	<select id="obtainLoanRequests" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Requests">
-		SELECT sol.*,tp.name as loanTypeName FROM requests sol
+		SELECT sol.*,tp.name as loanTypeName, ta.id_loan_type FROM requests sol
 		INNER JOIN request_taxes sti on sti.id_request = sol.id_request
 		INNER JOIN taxes ta on ta.id_tax = sti.id_tax
 		INNER JOIN loan_types tp on tp.id_loan_type = ta.id_loan_type
