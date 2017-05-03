@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import pe.edu.upc.prestasim.beans.Users;
 import pe.edu.upc.prestasim.dao.UsuarioDao;
+import pe.edu.upc.prestasim.utils.CodeResult;
+
+import java.nio.charset.CoderResult;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -13,8 +16,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioDao userDao;
 
 	@Override
-	public boolean registerUser(Users user) {
-		return (0 < userDao.regUser(user));
+	public CodeResult registerUser(Users user) {
+		Users userOnDb = userDao.obtainUserByDni(user.getDni());
+		if(userOnDb != null){
+			return CodeResult.ALREADY_REGISTERED_USER;
+		}
+		if(0 >= userDao.regUser(user)){
+			return CodeResult.REGISTER_ERROR;
+		}
+		return CodeResult.OK;
 	}
 
 	@Override

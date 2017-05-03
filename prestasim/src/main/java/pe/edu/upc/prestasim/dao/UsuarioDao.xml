@@ -19,6 +19,13 @@
 		)
 	</insert>
 
+	<select id="obtainUserByDni" parameterType="String" resultType="pe.edu.upc.prestasim.beans.Users">
+		SELECT * FROM users
+		<where>
+			dni = #{dni, jdbcType=VARCHAR}
+		</where>
+	</select>
+
 	<select id="obtainUser" parameterType="Integer" resultType="pe.edu.upc.prestasim.beans.Users">
 		SELECT id_user,name,dni,phone_number,email,id_payment_rank,
 		DATE_FORMAT(birth_date, '%d/%m/%Y') as birth_date FROM users

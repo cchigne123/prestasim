@@ -4,8 +4,8 @@
 <mapper namespace="pe.edu.upc.prestasim.dao.SolicitudDao">
 
 	<select id="obtainTaxForRequest" parameterType="pe.edu.upc.prestasim.beans.Requests"
-		resultType="pe.edu.upc.prestasim.beans.RequestTaxes">
-		select * from request_taxes
+		resultType="pe.edu.upc.prestasim.beans.Taxes">
+		select * from taxes
 		<where>
 			id_loan_type = #{id_loan_type, jdbcType=INTEGER} AND
 			age_limit &gt; (SELECT TIMESTAMPDIFF(YEAR,birth_date,now()) FROM users

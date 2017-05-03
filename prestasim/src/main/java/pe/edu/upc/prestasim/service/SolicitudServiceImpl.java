@@ -24,8 +24,8 @@ public class SolicitudServiceImpl implements SolicitudService {
 
 	@Override
 	public List<RequestTaxes> registerLoanRequest(Requests solicitud) {
-		List<RequestTaxes> options = new ArrayList<>();
-		List<Entities> entities = new ArrayList<>();
+		List<RequestTaxes> options = new ArrayList();
+		List<Entities> entities = new ArrayList();
 		List<Taxes> taxes = solicDao.obtainTaxForRequest(solicitud);
 		if(taxes != null && !taxes.isEmpty() && solicDao.regLoanRequest(solicitud) > 0){
 			for(Taxes tax : taxes){

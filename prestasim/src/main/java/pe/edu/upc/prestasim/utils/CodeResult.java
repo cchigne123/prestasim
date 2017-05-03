@@ -8,7 +8,8 @@ public enum CodeResult {
 	LOGIN_ERROR("1", "003E" ,"No se pudo autenticar al usuario"),
 	UPDATE_ERROR("1", "004E" ,"No se pudo actualizar el registro"),
 	FORBIDDEN_REQUEST_ERROR("1", "005E" ,"No tiene permisos para consultar esta solicitud"),
-	INEXISTENT_USER_ERROR("1", "006E" ,"El usuario consultado no existe");
+	INEXISTENT_USER_ERROR("1", "006E" ,"El usuario consultado no existe"),
+	ALREADY_REGISTERED_USER("1", "007E", "El dni ingresado ya existe en el sistema");
 
 	private String status;
 	private String code;

@@ -24,23 +24,20 @@ public class UsuarioController {
 	@RequestMapping(method = RequestMethod.POST, produces = Constants.APPLICATIONJSON)
     public @ResponseBody Response registerUser(@RequestBody Users user) {
 		Response response = new Response();
+		CodeResult codeResult = null;
 		try {
 			System.out.println(user.toString());
-			response.setStatus(CodeResult.OK.getStatus());
-			response.setMsgresult(CodeResult.OK.getMessage());
-			response.setCoderesult(CodeResult.OK.getCode());
-			if(!userService.registerUser(user)){
-				response.setCoderesult(CodeResult.REGISTER_ERROR.getCode());
-				response.setMsgresult(CodeResult.REGISTER_ERROR.getMessage());
-				response.setStatus(CodeResult.REGISTER_ERROR.getStatus());
+			codeResult = userService.registerUser(user);
+			if(CodeResult.OK.equals(codeResult)){
+				response.setUser(user);
 			}
-			response.setUser(user);
 		} catch (Exception e){
 			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
-			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
-			response.setMsgresult(CodeResult.GENERIC_ERROR.getMessage());
-			response.setStatus(CodeResult.GENERIC_ERROR.getStatus());
+			codeResult = CodeResult.GENERIC_ERROR;
 		}
+		response.setCoderesult(codeResult.getCode());
+		response.setMsgresult(codeResult.getMessage());
+		response.setStatus(codeResult.getStatus());
 		return response;
     }
 

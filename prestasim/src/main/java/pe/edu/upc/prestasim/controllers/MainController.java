@@ -14,6 +14,8 @@ import pe.edu.upc.prestasim.service.UsuarioService;
 import pe.edu.upc.prestasim.utils.CodeResult;
 import pe.edu.upc.prestasim.utils.Constants;
 
+import java.nio.charset.CoderResult;
+
 @RestController
 public class MainController {
 
@@ -51,6 +53,7 @@ public class MainController {
 		Response response = new Response();
 		try {
 			response.setPaymentRanks(masterService.obtainPaymentRanks());
+			response.setCoderesult(CodeResult.OK.getCode());
 		} catch (Exception e){
 			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
@@ -65,6 +68,7 @@ public class MainController {
 		Response response = new Response();
 		try {
 			response.setLoanTypes(masterService.obtainLoanTypes());
+			response.setCoderesult(CodeResult.OK.getCode());
 		} catch (Exception e){
 			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
