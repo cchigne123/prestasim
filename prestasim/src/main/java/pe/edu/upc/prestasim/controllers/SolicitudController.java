@@ -31,6 +31,7 @@ public class SolicitudController {
 			solicitud.setId_user(iduser);
 			solicitud.setOptions(solicService.registerLoanRequest(solicitud));
 			response.setRequest(solicitud);
+			response.setCoderesult(CodeResult.OK.getCode());
 		} catch (Exception e){
 			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
@@ -45,6 +46,7 @@ public class SolicitudController {
 		Response response = new Response();
 		try {
 			response.setRequests(solicService.obtainLoanRequests(iduser));
+			response.setCoderesult(CodeResult.OK.getCode());
 		} catch (Exception e){
 			System.out.println(e.getMessage() + " >> " + CodeResult.GENERIC_ERROR.getMessage());
 			response.setCoderesult(CodeResult.GENERIC_ERROR.getCode());
@@ -61,6 +63,7 @@ public class SolicitudController {
 			Requests sol = solicService.obtainLoanRequestOptions(idsol);
 			if(sol.getId_user().equals(iduser)){
 				response.setRequest(solicService.obtainLoanRequestOptions(idsol));
+				response.setCoderesult(CodeResult.OK.getCode());
 			} else {
 				response.setCoderesult(CodeResult.FORBIDDEN_REQUEST_ERROR.getCode());
 				response.setMsgresult(CodeResult.FORBIDDEN_REQUEST_ERROR.getMessage());
